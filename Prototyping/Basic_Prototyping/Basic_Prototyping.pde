@@ -20,12 +20,12 @@ void setup()
   // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
-  //Alohbetical order, should be same as OS ordering files
+  //Alphebetical order, should be same as OS ordering files
   String meatballParade = "Meatball-Parade";
   String sneakySnitch = "Sneaky-Snitch";
   //
   //Add reading into array
-  song[currentSong] = minim.loadFile( "../../Music/meatballParade.mp3"); //../../ + musicPathway + meatballParade + mp3FileName;
+  song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3"); //../../ + musicPathway + meatballParade + mp3FileName
   song[currentSong].play();
   //song[] = minim.loadFile();
   //Add currentSong as hardcoded link
