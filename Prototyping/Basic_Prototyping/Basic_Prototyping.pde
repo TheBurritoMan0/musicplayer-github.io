@@ -25,9 +25,16 @@ void setup()
   String sneakySnitch = "Sneaky-Snitch";
   //
   //Add reading into array
-  song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3"); //../../ + musicPathway + meatballParade + mp3FileName
-  song[currentSong].play();
-  //song[] = minim.loadFile();
+  String directory = "//../../" + musicPathway;
+  println(directory);
+  String file = directory + meatballParade + mp3FileName;
+  //
+  //song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3");
+  //
+  //song[currentSong+=1] = minim.loadFile( "../../Music/Sneaky-Snitch.mp3");
+  //song[1].play();
+  //song[currentSong+=1] = minim.loadFile();
+  
   //Add currentSong as hardcoded link
   //Use play(timeStart) and loop(numberOfLoops)
   //Inspect with println
