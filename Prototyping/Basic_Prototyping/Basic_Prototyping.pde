@@ -23,15 +23,27 @@ void setup()
   //Alohbetical order, should be same as OS ordering files
   String meatballParade = "Meatball-Parade";
   String sneakySnitch = "Sneaky-Snitch";
+  //
+  //Add reading into array
+  song[currentSong] = minim.loadFile( "../../Music/meatballParade.mp3"); //../../ + musicPathway + meatballParade + mp3FileName;
+  song[currentSong].play();
+  //song[] = minim.loadFile();
+  //Add currentSong as hardcoded link
+  //Use play(timeStart) and loop(numberOfLoops)
+  //Inspect with println
+  //Purpose is 2D shapes
 }//End setup
 //
 void draw () {
+  
 } //End draw
 //
 void mousePressed() {
+  
 } //End mousePressed
 //
 void keyPressed() {
+  
 } //End keyPressed
 //
 //End Main Program
