@@ -26,7 +26,7 @@ void setup()
   //
   //Add reading into array
   String directory = "//../../" + musicPathway;
-  println(directory);
+  println(currentSong, directory);
   String file = directory + meatballParade + mp3FileName;
   //
   //song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3");
