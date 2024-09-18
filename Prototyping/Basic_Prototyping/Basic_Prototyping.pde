@@ -25,11 +25,12 @@ void setup()
   String sneakySnitch = "Sneaky-Snitch";
   //
   //Add reading into array
-  String directory = "//../../" + musicPathway;
-  println(currentSong, directory);
+  String directory = "../../" + musicPathway;
+  println (currentSong, directory);
   String file = directory + meatballParade + mp3FileName;
+  println (file);
   //
-  //song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3");
+  song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3");
   //
   //song[currentSong+=1] = minim.loadFile( "../../Music/Sneaky-Snitch.mp3");
   //song[1].play();
@@ -39,7 +40,7 @@ void setup()
   //Use play(timeStart) and loop(numberOfLoops)
   //Inspect with println
   //Purpose is 2D shapes
-}//End setup
+} //End setup
 //
 void draw () {
   
