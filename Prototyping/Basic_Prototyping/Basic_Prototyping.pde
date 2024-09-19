@@ -36,9 +36,8 @@ void setup()
   //
   println(currentSong, song[currentSong]);
   //
+  currentSong = 0;
   //
-  //song[1].play();
-  //song[currentSong+=1] = minim.loadFile();
   song[currentSong].play();
   
   //Add currentSong as hardcoded link
