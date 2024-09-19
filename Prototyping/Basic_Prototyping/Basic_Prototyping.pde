@@ -29,17 +29,30 @@ void setup()
   println (currentSong, directory);
   String file = directory + meatballParade + mp3FileName;
   println (file);
+  song[currentSong] = minim.loadFile(file);
+  song[currentSong].play();
+  file = directory + sneakySnitch + mp3FileName;
+  song[currentSong+=1] = minim.loadFile(file);
   //
-  song[currentSong] = minim.loadFile( "../../Music/Meatball-Parade.mp3");
+  println(currentSong, song[currentSong]);
   //
-  //song[currentSong+=1] = minim.loadFile( "../../Music/Sneaky-Snitch.mp3");
+  //
   //song[1].play();
   //song[currentSong+=1] = minim.loadFile();
+  song[currentSong].play();
   
   //Add currentSong as hardcoded link
   //Use play(timeStart) and loop(numberOfLoops)
   //Inspect with println
   //Purpose is 2D shapes
+  //Introduce keyPressed as keyboard shortcuts
+  //Introduce mousePressed as interaction
+  //
+  //Future Problem Fixed
+  //beatYourCompetition.play();
+  //
+  //DIVs
+  //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
 } //End setup
 //
 void draw () {
