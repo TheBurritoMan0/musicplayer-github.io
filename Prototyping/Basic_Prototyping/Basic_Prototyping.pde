@@ -21,8 +21,8 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, should be same as OS ordering files
-  String meatballParade = "Meatball-Parade";
-  String sneakySnitch = "Sneaky-Snitch";
+  String meatballParade = "Meatball_Parade";
+  String sneakySnitch = "Sneaky_Snitch";
   //
   //Add reading into array
   String directory = "../../" + musicPathway;
