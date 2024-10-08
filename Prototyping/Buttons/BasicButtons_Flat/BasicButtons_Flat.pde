@@ -80,8 +80,8 @@ void setup()
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
   //Alphebetical order, same as OS ordering files
-  String meatballParade = "Meatball_Parade";
-  String sneakySnitch = "Sneaky_Snitch";
+  String meatballParade = "Meatball-Parade";
+  String sneakySnitch = "Sneaky-Snitch";
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
