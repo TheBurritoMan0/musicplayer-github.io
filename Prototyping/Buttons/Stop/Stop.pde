@@ -17,8 +17,16 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 //
-color orange=#CC5500, otherorange=#FA5F55;
+color orange=#CC5500, otherorange=#D38531, otherotherorange=#FA5F55, grey=#DED7D0, othergray=#BC6A11, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
+color dayForeground=orange, dayHoverover=otherorange, dayBackground=otherotherorange;
+color darkForeground=otherorange, darkHoverover=grey, darkBackground=othergray;
+color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
+color appColorForeground, appColorHoverover, appColorBackground;
+color stopButtonHoverover;
+//
+Boolean colorDarkMode=true;
+//
 void setup()
 {
   size(1000, 800);
@@ -84,18 +92,39 @@ void setup()
   //rect() based on variables; variables change with program (introduces parameters of a function and TABS)
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
-} //End setup
+  if (hour()<=7 && hour()>=17) 
+  {
+    //Night Mode
+    appColorForeground=nightForeground;
+    appColorHoverover=nightHoverover;
+    appColorBackground=nightBackground;
+  } 
+    else if (colorDarkMode= false && hour()<7 || hour()>17) 
+    {
+      //Dark Mode
+      appColorForeground=darkForeground;
+      appColorHoverover=darkHoverover;
+      appColorBackground=darkBackground;
+    } 
+    else 
+    {
+      //Day Mode
+      appColorForeground=dayForeground;
+      appColorHoverover=dayHoverover; 
+      appColorBackground=dayBackground;
+    } 
+ } //End setup
 //
 void draw() {
-  background(45); // Gray Scale: 0-255
+  background(55); // Gray Scale: 0-255
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //stroke(); //Colour
   //
   /* Note: 3 types of colour, in pairs for hoverover
-   - Day: TBA | TBA (Hoverover)
-   - Dark: TBA | TBA (Hoverover)
-   - Night, no blue: TBA | TBA (Hoverover)
+   - Day: Foreground: #DED7D0 | Hoverover: #D38531 | Background: #FFBC74
+   - Dark: Foreground: #DED7D0 | Hoverover: #BC6A11 | Background: #554C43
+   - Night, no blue: Foreground: #312E2B | Hoverover: #2E2E2E | Background: #0D0D0D
    - Dark Mode is for all the time, how bright the screen is and eye strain
    - API: when does sunrise, when does sunset, is the system time within those hours
    - Night mode is for all the time or just
@@ -103,9 +132,9 @@ void draw() {
    */
   //if ( day ) {} else if ( dark ) {} else {}
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    stopButtonHoverOver = otherorange;
+    stopButtonHoverOver= appColorHoverover;
   } else {
-    stopButtonHoverOver = orange;
+    stopButtonHoverOver = appColorForeground;
   }
   fill(stopButtonHoverOver);
   //stroke(); //Colour
