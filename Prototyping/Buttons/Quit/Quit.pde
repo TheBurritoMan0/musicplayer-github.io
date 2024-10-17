@@ -16,7 +16,8 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
-float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
+float quitLine;
+float quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2, quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4;  
 //
 color orange=#CC5500, otherorange=#D38531, otherotherorange=#FA5F55, grey=#DED7D0, othergray=#BC6A11, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
@@ -37,7 +38,7 @@ void setup()
   musicButtonDIV_Width = appWidth*1/2;
   musicButtonDIV_Height = appHeight*1/2;
   musicButtonDIV_X = musicButtonDIV_Width - musicButtonDIV_Width*1/2;
-  musicButtonDIV_Y = musicButtonDIV_Height - musicButtonDIV_Height*1/2;
+  musicButtonDIV_Y = musicButtonDIV_Height- musicButtonDIV_Height*1/2;
   //Use if statement to change, introduce ternary operator
   //
   //Population (Variables)
@@ -64,12 +65,15 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
-  playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
-  playButton2Y = musicButtonSquareY + musicButtonSquareHeight*1/2;
-  playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4;
-  playButton3Y = musicButtonSquareY + musicButtonSquareHeight*3/4;
+  quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
+  quitButtonX1 = stopX;
+  quitButtonY1 = stopY;
+  quitButtonX2 = stopX+stopWidth;
+  quitButtonY2 = stopY+stopHeight;
+  quitButtonX3 = stopX; 
+  quitButtonY3 = stopY;
+  quitButtonX4 = stopX; 
+  quitButtonY4 = stopY;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -89,7 +93,7 @@ void setup()
   //
   currentSong = 0;
   //
-  //song[currentSong].play();
+  song[currentSong].play();
   //Use play(timeStart) & loop(numberOfLoops)
   //Purpose is 2D Shapes
   //Introduce keyPressed as keyboard shortcuts
@@ -127,7 +131,7 @@ void setup()
  } //End setup
 //
 void draw() {
-  background(appColorBackground); // Gray Scale: 0-255
+  background(55); // Gray Scale: 0-255
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //stroke(); //Colour
@@ -148,11 +152,13 @@ void draw() {
     stopButtonHoverOver = appColorForeground;
   }
   fill(stopButtonHoverOver);
-  noStroke(); //Colour
+  //noStroke(); //Colour
   //
-  triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
+  strokeWeight(quitLine);
+  line(quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2);
+  line(quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4);
   fill(225);
-  stroke(1);
+  //noStroke();
   //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
@@ -167,7 +173,11 @@ void mousePressed() {
    Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
    */
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
-    song[currentSong].loop(0);
+   if ( song[currentSong].isPlaying() ) {
+   song[currentSong].pause(); //single tap
+   } else {
+   song[currentSong].rewind(); //double tap
+   }
    }
 } //End mousePressed
 //
