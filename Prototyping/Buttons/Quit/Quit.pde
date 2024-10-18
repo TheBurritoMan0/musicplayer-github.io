@@ -162,8 +162,10 @@ void draw() {
   fill(stopButtonHoverOver);
   noStroke();
   //rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(255);
+  fill(1);
   stroke(1);
+  textSize(100);
+  text("very cool music player", 40, 120); 
   //noStroke();
   //
   stroke(quitLineColor);
