@@ -7,7 +7,7 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim;
-int numberOfSongs = 2; //Able to Autodetect based on Pathway
+int numberOfSongs = 3; //Able to Autodetect based on Pathway
 AudioPlayer[] song = new AudioPlayer[numberOfSongs];
 int currentSong = numberOfSongs - numberOfSongs; //beginning current song is ZERO
 //
@@ -23,6 +23,7 @@ void setup()
   //Alphebetical order, should be same as OS ordering files
   String meatballParade = "Meatball_Parade";
   String sneakySnitch = "Sneaky_Snitch";
+  String monkeys = "Monkeys-Spinning-Monkeys";
   //
   //Add reading into array
   String directory = "../../" + musicPathway;
@@ -33,6 +34,7 @@ void setup()
   song[currentSong].play();
   file = directory + sneakySnitch + mp3FileName;
   song[currentSong+=1] = minim.loadFile(file);
+  file = directory + monkeys + mp3FileName;
   //
   println(currentSong, song[currentSong]);
   //
