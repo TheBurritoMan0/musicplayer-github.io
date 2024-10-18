@@ -19,13 +19,13 @@ float stopX, stopY, stopWidth, stopHeight;
 float quitLine;
 float quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2, quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4;  
 //
-color orange=#CC5500, otherorange=#D38531, otherotherorange=#FA5F55, grey=#DED7D0, othergray=#BC6A11, dark=#554C43, black=#000000, sortablack=#2E2E2E;
+color orange=#CC5500, otherorange=#D38531, otherotherorange=#E8A552, othergray=#625C55, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
 color dayForeground=orange, dayHoverover=otherorange, dayBackground=otherotherorange;
-color darkForeground=otherorange, darkHoverover=grey, darkBackground=othergray;
+color darkForeground=orange, darkHoverover=dark, darkBackground=othergray;
 color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
 color appColorForeground, appColorHoverover, appColorBackground;
-color stopButtonHoverover;
+color stopButtonHoverover, quitLineColor;
 //
 Boolean colorDarkMode=true;
 //
@@ -70,10 +70,10 @@ void setup()
   quitButtonY1 = stopY;
   quitButtonX2 = stopX+stopWidth;
   quitButtonY2 = stopY+stopHeight;
-  quitButtonX3 = stopX; 
-  quitButtonY3 = stopY;
-  quitButtonX4 = stopX; 
-  quitButtonY4 = stopY;
+  quitButtonX3 = quitButtonX2; 
+  quitButtonY3 = quitButtonY1;
+  quitButtonX4 = quitButtonX1; 
+  quitButtonY4 = quitButtonY2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -107,7 +107,7 @@ void setup()
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
   println(colorDarkMode);
-  if (colorDarkMode==false && hour()<=7 && hour()>=17) 
+  if (colorDarkMode==true && hour()<=7 && hour()>=17) 
   {
     //Night Mode
     appColorForeground=nightForeground;
@@ -115,7 +115,7 @@ void setup()
     appColorBackground=nightBackground;
     println("sigma");
   } 
-    else if (colorDarkMode==false && hour()<7 || hour()>17) 
+    else if (colorDarkMode==true && hour()<7 && hour()>17) 
     {
       //Dark Mode
       appColorForeground=darkForeground;
@@ -129,12 +129,12 @@ void setup()
       appColorForeground=dayForeground;
       appColorHoverover=dayHoverover; 
       appColorBackground=dayBackground;
-      println("sigma3");
+      println("sigma2");
     } 
  } //End setup
 //
 void draw() {
-  background(55); // Gray Scale: 0-255
+  background(appColorBackground); // Gray Scale: 0-255
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //stroke(); //Colour
@@ -151,18 +151,27 @@ void draw() {
   //if ( day ) {} else if ( dark ) {} else {}
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
     stopButtonHoverOver= appColorHoverover;
+    quitLineColor = appColorHoverover;
   } else {
     stopButtonHoverOver = appColorForeground;
+    quitLineColor = appColorForeground;
   }
   fill(stopButtonHoverOver);
   //noStroke(); //Colour
   //
+  fill(stopButtonHoverOver);
+  noStroke();
+  //rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  fill(255);
+  stroke(1);
+  //noStroke();
+  //
+  stroke(quitLineColor);
   strokeWeight(quitLine);
   line(quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2);
   line(quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4);
-  fill(225);
-  //noStroke();
-  //
+  fill(255);
+  stroke(1);
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
   //song[currentSong].isPlaying();
