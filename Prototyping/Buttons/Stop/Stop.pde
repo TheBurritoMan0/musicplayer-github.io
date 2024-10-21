@@ -16,14 +16,16 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
+float stopLine;
+float stopButtonX1, stopButtonY1, stopButtonX2, stopButtonY2, stopButtonX3, stopButtonY3, stopButtonX4, stopButtonY4;
 //
-color orange=#CC5500, otherorange=#D38531, otherotherorange=#FA5F55, grey=#DED7D0, othergray=#BC6A11, dark=#554C43, black=#000000, sortablack=#2E2E2E;
+color orange=#CC5500, otherorange=#D38531, otherotherorange=#E8A552, othergray=#625C55, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
 color dayForeground=orange, dayHoverover=otherorange, dayBackground=otherotherorange;
-color darkForeground=otherorange, darkHoverover=grey, darkBackground=othergray;
+color darkForeground=orange, darkHoverover=dark, darkBackground=othergray;
 color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
 color appColorForeground, appColorHoverover, appColorBackground;
-color stopButtonHoverover;
+color stopButtonHoverover, stopLineColor;
 //
 Boolean colorDarkMode=true;
 //
@@ -63,6 +65,15 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  stopLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
+  stopButtonX1 = stopX;
+  stopButtonY1 = stopY;
+  stopButtonX2 = stopX+stopWidth;
+  stopButtonY2 = stopY+stopHeight;
+  stopButtonX3 = stopButtonX2; 
+  stopButtonY3 = stopButtonY1;
+  stopButtonX4 = stopButtonX1; 
+  stopButtonY4 = stopButtonY2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -123,7 +134,7 @@ void setup()
  } //End setup
 //
 void draw() {
-  background(55); // Gray Scale: 0-255
+  background(appColorBackground); // Gray Scale: 0-255
   //
   rect( musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight );
   //stroke(); //Colour
@@ -140,15 +151,28 @@ void draw() {
   //if ( day ) {} else if ( dark ) {} else {}
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
     stopButtonHoverOver= appColorHoverover;
+    stopLineColor = appColorHoverover;
   } else {
     stopButtonHoverOver = appColorForeground;
+    stopLineColor = appColorForeground;
   }
   fill(stopButtonHoverOver);
-  //stroke(); //Colour
-  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(225);
-  //noStroke();
+  //noStroke(); //Colour
   //
+  fill(stopButtonHoverOver);
+  noStroke();
+  //rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  fill(1);
+  stroke(1);
+  textSize(100);
+  text("very cool music player", 40, 120); 
+  //
+  stroke(stopLineColor);
+  strokeWeight(stopLine);
+  line(stopButtonX1, stopButtonY1, stopButtonX2, stopButtonY2);
+  line(stopButtonX3, stopButtonY3, stopButtonX4, stopButtonY4);
+  fill(255);
+  stroke(1);
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
   //song[currentSong].isPlaying();
