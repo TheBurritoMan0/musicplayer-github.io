@@ -16,8 +16,6 @@ int appWidth, appHeight;
 float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height;
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
-float stopLine;
-float stopButtonX1, stopButtonY1, stopButtonX2, stopButtonY2, stopButtonX3, stopButtonY3, stopButtonX4, stopButtonY4;
 //
 color orange=#CC5500, otherorange=#D38531, otherotherorange=#E8A552, othergray=#625C55, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
@@ -65,15 +63,6 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  stopLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
-  stopButtonX1 = stopX;
-  stopButtonY1 = stopY;
-  stopButtonX2 = stopX+stopWidth;
-  stopButtonY2 = stopY+stopHeight;
-  stopButtonX3 = stopButtonX2; 
-  stopButtonY3 = stopButtonY1;
-  stopButtonX4 = stopButtonX1; 
-  stopButtonY4 = stopButtonY2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -157,22 +146,13 @@ void draw() {
     stopLineColor = appColorForeground;
   }
   fill(stopButtonHoverOver);
-  //noStroke(); //Colour
-  //
-  fill(stopButtonHoverOver);
   noStroke();
-  //rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
-  fill(1);
+  rect( stopX, stopY, stopWidth, stopHeight ); //(X, Y, width, height, roundedEdge1, roundedEdge2, roundedEdge3, roundedEdge4, )
+  fill(225);
   stroke(1);
   textSize(100);
   text("very cool music player", 40, 120); 
   //
-  stroke(stopLineColor);
-  strokeWeight(stopLine);
-  line(stopButtonX1, stopButtonY1, stopButtonX2, stopButtonY2);
-  line(stopButtonX3, stopButtonY3, stopButtonX4, stopButtonY4);
-  fill(255);
-  stroke(1);
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
   //song[currentSong].isPlaying();

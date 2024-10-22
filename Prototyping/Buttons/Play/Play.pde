@@ -17,6 +17,7 @@ float musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_H
 float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButtonSquareHeight;
 float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
+float quitLine;
 //
 color orange=#CC5500, otherorange=#D38531, otherotherorange=#E8A552, othergray=#625C55, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
@@ -25,6 +26,7 @@ color darkForeground=orange, darkHoverover=dark, darkBackground=othergray;
 color nightForeground=dark, nightHoverover=black, nightBackground=sortablack;
 color appColorForeground, appColorHoverover, appColorBackground;
 color stopButtonHoverover;
+color quitLineColor;
 //
 Boolean colorDarkMode=true;
 //
@@ -64,6 +66,7 @@ void setup()
   stopHeight = musicButtonSquareHeight*1/2;
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
+  quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
   playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
   playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
   playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
@@ -147,16 +150,31 @@ void draw() {
   //if ( day ) {} else if ( dark ) {} else {}
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
     stopButtonHoverOver= appColorHoverover;
+    quitLineColor = appColorHoverover;
   } else {
     stopButtonHoverOver = appColorForeground;
+    quitLineColor = appColorForeground;
   }
-  fill(stopButtonHoverOver);
+  //
+  //
+  fill(stopButtonHoverover);
   noStroke(); //Colour
   //
+  //triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
+  //
+  fill(1);
+  stroke(1);
+  textSize(100);
+  text("very cool music player", 40, 120);
+  //
+  stroke(quitLineColor);
+  strokeWeight(quitLine);
+  noFill();
+  noStroke();
+  fill(quitLineColor);
   triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
   fill(225);
   stroke(1);
-  //
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
   //song[currentSong].isPlaying();
@@ -179,7 +197,7 @@ void keyPressed() {
    Note: CAP Lock with ||
    if ( key==? || key==? ) ;
    */
-  if ( key=='P' || key=='p' ) song[currentSong].play(); //Simple Play, no double tap possible
+  //if ( key=='P' || key=='p' ) song[currentSong].play(); //Simple Play, no double tap possible
   //
   if ( key=='P' || key=='p' ) song[currentSong].loop(0); //Simple Play, double tap possible
   /* Note: double tap is automatic rewind, no pause
@@ -188,13 +206,29 @@ void keyPressed() {
    */
   //if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
   //
-  if ( key=='S' | key=='s' ) {
+  if ( key=='S' | key=='s' ) { 
    if ( song[currentSong].isPlaying() ) {
    song[currentSong].pause(); //single tap
    } else {
    song[currentSong].rewind(); //double tap
    }
    }
+   /*
+   if ( key=='' | key=='' ); // one loop
+   if ( key=='' | key=='' ); // loop forever
+   if ( key=='' | key=='' ); // fast forward
+   if ( key=='' | key=='' ); // rewind
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); // 
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   if ( key=='' | key=='' ); //
+   */
 } //End keyPressed
 //
 // End Main Program
