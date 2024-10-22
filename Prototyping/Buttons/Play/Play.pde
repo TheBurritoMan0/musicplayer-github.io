@@ -213,12 +213,12 @@ void keyPressed() {
    song[currentSong].rewind(); //double tap
    }
    }
+   if ( key=='L' | key=='l' ); song[currentSong].loop(1); // one loop
+   if ( key=='K' | key=='k' ); song[currentSong].loop(); // loop forever
+   if ( key=='F' | key=='f' ); song[currentSong].skip(10000); // fast forward
+   if ( key=='R' | key=='r' );  song[currentSong].skip(-10000); // rewind
+   //if ( key=='' | key=='' ); //
    /*
-   if ( key=='' | key=='' ); // one loop
-   if ( key=='' | key=='' ); // loop forever
-   if ( key=='' | key=='' ); // fast forward
-   if ( key=='' | key=='' ); // rewind
-   if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); // 
    if ( key=='' | key=='' ); //
