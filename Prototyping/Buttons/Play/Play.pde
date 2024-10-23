@@ -216,11 +216,36 @@ void keyPressed() {
    if ( key=='L' | key=='l' ); song[currentSong].loop(1); // one loop
    if ( key=='K' | key=='k' ); song[currentSong].loop(); // loop forever
    if ( key=='F' | key=='f' ); song[currentSong].skip(10000); // fast forward
-   if ( key=='R' | key=='r' );  song[currentSong].skip(-10000); // rewind
-   //if ( key=='' | key=='' ); //
+   if ( key=='R' | key=='r' ); song[currentSong].skip(-10000); // rewind
+   if ( key=='M' | key=='m' ); {//mute
+     //
+     if ( song[currentSong].isMuted() ) {
+       //ERROR: song might not be playing
+       //CATCH: ask .isPlaying() or !.isPlaying()song[currentSong].unmute();
+       song[currentSong].unmute();
+     } else {
+       //Possible ERROR: Might rewind the song
+       song[currentSong].mute();
+     }
+   }
+     if ( key=='O' || key=='o' ) { // Pause
+      //
+      if ( song[currentSong].isPlaying() ) {
+       song[currentSong].pause();
+      } else {
+       song[currentSong].play();
+      }
+    }
+   if (key == CODED || keyCode ==ESC) exit(); //good ol' quit button
+   if (key == 'Q' || key == 'q') exit();
+   /*if ( key=='>' | key=='>' ); {//next song
+     song[currentSong].stop;
+     song[currentSong+=1] = minim.loadFile(file);
+     song[currentSong].play;
+   }
+   if ( key=='<' | key=='<' ); //previous song
+   */
    /*
-   if ( key=='' | key=='' ); //
-   if ( key=='' | key=='' ); // 
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
