@@ -106,31 +106,29 @@ void setup()
   //rect( X, Y, Width, Height );
   //rect( musicButtonDIV_X, musicButtonDIV_Y, musicButtonDIV_Width, musicButtonDIV_Height );
   println(colorDarkMode);
-  if (colorDarkMode==false && hour()<=7 && hour()>=17) 
+  if (colorDarkMode==false && hour()<=7 && hour()>=17)
   {
     //Night Mode
     appColorForeground=nightForeground;
     appColorHoverover=nightHoverover;
     appColorBackground=nightBackground;
     println("sigma");
-  } 
-    else if (colorDarkMode==false && hour()<7 || hour()>17) 
-    {
-      //Dark Mode
-      appColorForeground=darkForeground;
-      appColorHoverover=darkHoverover;
-      appColorBackground=darkBackground;
-      println("sigma1");
-    } 
-    else 
-    {
-      //Day Mode
-      appColorForeground=dayForeground;
-      appColorHoverover=dayHoverover; 
-      appColorBackground=dayBackground;
-      println("sigma3");
-    } 
- } //End setup
+  } else if (colorDarkMode==false && hour()<7 || hour()>17)
+  {
+    //Dark Mode
+    appColorForeground=darkForeground;
+    appColorHoverover=darkHoverover;
+    appColorBackground=darkBackground;
+    println("sigma1");
+  } else
+  {
+    //Day Mode
+    appColorForeground=dayForeground;
+    appColorHoverover=dayHoverover;
+    appColorBackground=dayBackground;
+    println("sigma3");
+  }
+} //End setup
 //
 void draw() {
   background(appColorBackground); // Gray Scale: 0-255
@@ -184,12 +182,12 @@ void draw() {
 void mousePressed() {
   //Boolean for Click
   //if() {} else {}
-   /* STOP Button Mouse Press, after Hoverover
+  /* STOP Button Mouse Press, after Hoverover
    Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
    */
   if ( mouseX>musicButtonSquareX && mouseX<musicButtonSquareX+musicButtonSquareWidth && mouseY>musicButtonSquareY && mouseY<musicButtonSquareY+musicButtonSquareHeight ) {
     song[currentSong].loop(0);
-   }
+  }
 } //End mousePressed
 //
 void keyPressed() {
@@ -206,46 +204,58 @@ void keyPressed() {
    */
   //if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
   //
-  if ( key=='S' | key=='s' ) { 
-   if ( song[currentSong].isPlaying() ) {
-   song[currentSong].pause(); //single tap
-   } else {
-   song[currentSong].rewind(); //double tap
-   }
-   }
-   if ( key=='L' | key=='l' ); song[currentSong].loop(1); // one loop
-   if ( key=='K' | key=='k' ); song[currentSong].loop(); // loop forever
-   if ( key=='F' | key=='f' ); song[currentSong].skip(10000); // fast forward
-   if ( key=='R' | key=='r' ); song[currentSong].skip(-10000); // rewind
-   if ( key=='M' | key=='m' ); {//mute
-     //
-     if ( song[currentSong].isMuted() ) {
-       //ERROR: song might not be playing
-       //CATCH: ask .isPlaying() or !.isPlaying()song[currentSong].unmute();
-       song[currentSong].unmute();
-     } else {
-       //Possible ERROR: Might rewind the song
-       song[currentSong].mute();
-     }
-   }
-     if ( key=='O' || key=='o' ) { // Pause
-      //
-      if ( song[currentSong].isPlaying() ) {
-       song[currentSong].pause();
-      } else {
-       song[currentSong].play();
-      }
+  if ( key=='S' | key=='s' ) {
+    if ( song[currentSong].isPlaying() ) {
+      song[currentSong].pause(); //single tap
+    } else {
+      song[currentSong].rewind(); //double tap
     }
-   if (key == CODED || keyCode ==ESC) exit(); //good ol' quit button
-   if (key == 'Q' || key == 'q') exit();
-   /*if ( key=='>' | key=='>' ); {//next song
-     song[currentSong].stop;
-     song[currentSong+=1] = minim.loadFile(file);
-     song[currentSong].play;
-   }
-   if ( key=='<' | key=='<' ); //previous song
-   */
-   /*
+  }
+  if ( key=='L' | key=='l' );
+  song[currentSong].loop(1); // one loop
+  if ( key=='K' | key=='k' );
+  song[currentSong].loop(); // loop forever
+  if ( key=='F' | key=='f' );
+  song[currentSong].skip(10000); // fast forward
+  if ( key=='R' | key=='r' );
+  song[currentSong].skip(-10000); // rewind
+  if ( key=='M' | key=='m' );
+  {//mute
+    //
+    if ( song[currentSong].isMuted() ) {
+      //ERROR: song might not be playing
+      //CATCH: ask .isPlaying() or !.isPlaying()song[currentSong].unmute();
+      song[currentSong].unmute();
+    } else {
+      //Possible ERROR: Might rewind the song
+      song[currentSong].mute();
+    }
+  }
+  if ( key=='O' || key=='o' ) { // Pause
+    //
+    if ( song[currentSong].isPlaying() ) {
+      song[currentSong].pause();
+    } else {
+      song[currentSong].play();
+    }
+  }
+  if (key == CODED || keyCode ==ESC) exit(); //good ol' quit button
+  if (key == 'Q' || key == 'q') exit();
+  if ( key=='N' | key=='n' );
+  {//next song
+    if (song[currentSong].isPlaying() ) {
+      song[currentSong].pause();
+      song[currentSong].rewind();
+      //
+      currentSong++;
+      song[currentSong].play();
+    } else {
+     
+      
+  }
+  }
+  if ( key=='<' | key=='<' ); //previous song
+  /*
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
