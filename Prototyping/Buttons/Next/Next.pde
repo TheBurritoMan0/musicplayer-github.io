@@ -18,6 +18,7 @@ float musicButtonSquareX, musicButtonSquareY, musicButtonSquareWidth, musicButto
 float stopX, stopY, stopWidth, stopHeight;
 float playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y;
 float quitLine;
+float quitButtonX1, quitButtonY1, quitButtonX2, quitButtonY2, quitButtonX3, quitButtonY3, quitButtonX4, quitButtonY4;
 //
 color orange=#CC5500, otherorange=#D38531, otherotherorange=#E8A552, othergray=#625C55, dark=#554C43, black=#000000, sortablack=#2E2E2E;
 color stopButtonHoverOver;
@@ -67,16 +68,20 @@ void setup()
   stopX = musicButtonSquareX + musicButtonSquareWidth*1/4;
   stopY = musicButtonSquareY + musicButtonSquareHeight*1/4;
   quitLine = (musicButtonSquareWidth/musicButtonSquareWidth) + musicButtonSquareWidth*1/4*1/2;
-  playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4;
+  playButton1X = musicButtonSquareX + musicButtonSquareWidth*1/4/1.2;
   playButton1Y  = musicButtonSquareY + musicButtonSquareHeight*1/4;
-  playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4;
+  playButton2X = musicButtonSquareX + musicButtonSquareWidth*3/4/1.2;
   playButton2Y = musicButtonSquareY + musicButtonSquareHeight*1/2;
-  playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4;
+  playButton3X = musicButtonSquareX + musicButtonSquareWidth*1/4/1.2;
   playButton3Y = musicButtonSquareY + musicButtonSquareHeight*3/4;
   quitButtonX1 = stopX;
   quitButtonY1 = stopY;
-  quitButtonX2 = stopX+stopWidth*1/1.5;
+  quitButtonX2 = stopX+stopWidth*1/1.15;
   quitButtonY2 = stopY+stopHeight;
+  quitButtonX3 = quitButtonX2; 
+  quitButtonY3 = quitButtonY1;
+  quitButtonX4 = quitButtonX1; 
+  quitButtonY4 = quitButtonY2;
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder
   //
@@ -177,6 +182,13 @@ void draw() {
   triangle(playButton1X, playButton1Y, playButton2X, playButton2Y, playButton3X, playButton3Y);
   fill(225);
   stroke(1);
+  //
+  stroke(quitLineColor);
+  strokeWeight(quitLine);
+  strokeCap(SQUARE);  
+  line(quitButtonX2, quitButtonY2, quitButtonX3, quitButtonY3);
+  fill(255);
+  stroke(1);
   //Music Buttons Interactions: cascading IFs can become AND Statements
   //Note: keypressed must have click on screen
   //song[currentSong].isPlaying();
@@ -215,14 +227,10 @@ void keyPressed() {
       song[currentSong].rewind(); //double tap
     }
   }
-  if ( key=='L' | key=='l' );
-  song[currentSong].loop(1); // one loop
-  if ( key=='K' | key=='k' );
-  song[currentSong].loop(); // loop forever
-  if ( key=='F' | key=='f' );
-  song[currentSong].skip(10000); // fast forward
-  if ( key=='R' | key=='r' );
-  song[currentSong].skip(-10000); // rewind
+  if ( key=='L' | key=='l' ) song[currentSong].loop(1); // one loop
+  if ( key=='K' | key=='k' ) song[currentSong].loop(); // loop forever
+  if ( key=='F' | key=='f' ) song[currentSong].skip(10000); // fast forward
+  if ( key=='R' | key=='r' ) song[currentSong].skip(-10000); // rewind
   if ( key=='M' | key=='m' );
   {//mute
     //
@@ -245,7 +253,7 @@ void keyPressed() {
   }
   if (key == CODED || keyCode ==ESC) exit(); //good ol' quit button
   if (key == 'Q' || key == 'q') exit();
-  if ( key=='N' | key=='n' );
+  if ( key=='N' | key=='n' )
   {//next song
     if (song[currentSong].isPlaying() ) {
       song[currentSong].pause();
@@ -263,11 +271,12 @@ void keyPressed() {
       //
       song[currentSong].rewind();
       //
-      if ( currentSong==numberOfSongs-1 ) {
-        currentSong = 0;
-      } else {
-        currentSong++;
-  }
+    }
+    if ( currentSong==numberOfSongs-1 ) {
+      currentSong = 0;
+    } else {
+      currentSong++;
+    }
   }
   if ( key=='<' | key=='<' ); //previous song
   /*
@@ -279,7 +288,6 @@ void keyPressed() {
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
    */
-}
-//End keyPressed
+} //End keyPressed
 //
 // End Main Program
