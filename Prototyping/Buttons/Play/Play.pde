@@ -249,9 +249,20 @@ void keyPressed() {
       //
       currentSong++;
       song[currentSong].play();
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
+      }
+      song[currentSong].play();
     } else {
-     
-      
+      //
+      song[currentSong].rewind();
+      //
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
   }
   }
   if ( key=='<' | key=='<' ); //previous song
