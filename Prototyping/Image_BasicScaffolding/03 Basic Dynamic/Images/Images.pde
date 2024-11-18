@@ -39,7 +39,7 @@ void setup() {
   */
   if ( freezerWidth > freezerHeight ) { //DIV Landscape, find larger side
     picFreezerHeightChanged = freezerHeight;
-    picFreezerWidthChanged = (picFreezerWidth > picFreezerHeight) ? picFreezerHeightChanged / ratio : picFreezerWidthChanged * ratio;
+    picFreezerWidthChanged = (picFreezerWidth > picFreezerHeight) ? picFreezerWidthChanged / ratio : picFreezerWidthChanged * ratio;
   } else { //DIV Portrait
     picFreezerWidthChanged = freezerWidth;
     picFreezerHeightChanged = (picFreezerWidth > picFreezerHeight) ? picFreezerWidthChanged / ratio : picFreezerWidthChanged * ratio;

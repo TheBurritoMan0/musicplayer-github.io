@@ -275,6 +275,7 @@ void keyPressed() {
    if ( key=='' | key=='' ); //
    if ( key=='' | key=='' ); //
    */
+  }
 } //End keyPressed
 //
 // End Main Program
