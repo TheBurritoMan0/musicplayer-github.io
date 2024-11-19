@@ -61,6 +61,8 @@ void mousePressed() {
 }
 //
 void keyPressed() {
+  if (key==DOWN);
+    
 }
 //
 //End MAIN
