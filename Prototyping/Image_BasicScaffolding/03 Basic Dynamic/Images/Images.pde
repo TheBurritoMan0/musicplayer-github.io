@@ -6,6 +6,7 @@ PImage picBackground, picFreezer;
 int picFreezerWidth, picFreezerHeight;
 float freezerX_Changed, freezerY_Changed;
 float picFreezerWidthChanged, picFreezerHeightChanged, biggerSide, smallerSide, ratio;
+Boolean centeredVertical=true;
 //
 void setup() {
   size( 1000, 800 ); //Landscape
@@ -40,9 +41,16 @@ void setup() {
   if ( freezerWidth > freezerHeight ) { //DIV Landscape, find larger side
     picFreezerHeightChanged = freezerHeight;
     picFreezerWidthChanged = (picFreezerWidth > picFreezerHeight) ? picFreezerWidthChanged / ratio : picFreezerWidthChanged * ratio;
+    println( "Inside If-true:", picFreezerWidthChanged );
   } else { //DIV Portrait
     picFreezerWidthChanged = freezerWidth;
     picFreezerHeightChanged = (picFreezerWidth > picFreezerHeight) ? picFreezerWidthChanged / ratio : picFreezerWidthChanged * ratio;
+    println( "Inside If-true:", picFreezerHeightChanged );
+    if ( centeredVertical==true ) {
+      float extraSpace = freezerHeight - picFreezerHeightChanged;
+      println(extraSpace);
+      freezerY_Changed = freezerY + extraSpace*1/2;
+    }
   }
   println( "Changed Width:", picFreezerWidthChanged, "\tChanged Height:", picFreezerHeightChanged );
   //
@@ -54,6 +62,9 @@ void setup() {
 void draw() {
   //Draw Image One Time, for testing
   image( picBackground, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  //
+  rect(freezerX, freezerY, freezerHeight, freezerWidth);
+  //
   image( picFreezer, freezerX_Changed, freezerY_Changed, picFreezerWidthChanged, picFreezerHeightChanged );
 }
 //
@@ -61,8 +72,11 @@ void mousePressed() {
 }
 //
 void keyPressed() {
-  if (key==DOWN);
-    
+  if (key==DOWN); {
+    picFreezer = loadImage("../../../../Image/Square/cell.jpg");
+  }
 }
+
+
 //
 //End MAIN
