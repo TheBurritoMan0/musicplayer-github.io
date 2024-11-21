@@ -7,6 +7,10 @@ int picFreezerWidth, picFreezerHeight;
 float freezerX_Changed, freezerY_Changed;
 float picFreezerWidthChanged, picFreezerHeightChanged, biggerSide, smallerSide, ratio;
 Boolean centeredVertical=true;
+int maxImages = 2;
+int imageIndex = 0;
+//
+PImage[] images = new PImage[maxImages];
 //
 void setup() {
   size( 1000, 800 ); //Landscape
@@ -23,9 +27,12 @@ void setup() {
   freezerY_Changed = freezerY = appHeight * 1/4;
   freezerWidth = appWidth * 1/2;
   freezerHeight = appHeight * 1/2;
-  picFreezer = loadImage("../../../../Image/Landscape/freezer.jpg");
+  picFreezer = loadImage("../../../../Image/Landscape/picture0.jpg");
   picFreezerWidthChanged = picFreezerWidth = 860;
   picFreezerHeightChanged = picFreezerHeight = 529;
+  for (int i = 0; i < images.length; i ++ ) {
+    images[i] = loadImage( "picture" + i + ".jpg" );
+  }
   //
   //Image Compression
   biggerSide = ( picFreezerWidth > picFreezerHeight ) ? picFreezerWidth : picFreezerHeight ;
@@ -65,7 +72,7 @@ void draw() {
   //
   rect(freezerX, freezerY, freezerHeight, freezerWidth);
   //
-  image( picFreezer, freezerX_Changed, freezerY_Changed, picFreezerWidthChanged, picFreezerHeightChanged );
+  image(images[imageIndex], freezerX_Changed, freezerY_Changed, picFreezerWidthChanged, picFreezerHeightChanged );
 }
 //
 void mousePressed() {
@@ -73,7 +80,7 @@ void mousePressed() {
 //
 void keyPressed() {
   if (key==DOWN); {
-    picFreezer = loadImage("../../../../Image/Square/cell.jpg");
+    imageIndex = int(random(images.length));
   }
 }
 
