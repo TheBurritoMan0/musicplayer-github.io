@@ -79,11 +79,9 @@ void mousePressed() {
 }
 //
 void keyPressed() {
-  if (key==DOWN); {
-    imageIndex = int(random(images.length));
+  if (key==CODED && keyCode==DOWN ) {
+    imageIndex = (imageIndex + 1) % images.length;
   }
 }
-
-
 //
 //End MAIN
