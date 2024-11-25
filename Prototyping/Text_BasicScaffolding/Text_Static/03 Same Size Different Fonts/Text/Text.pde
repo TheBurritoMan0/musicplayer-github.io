@@ -6,16 +6,19 @@
  */
 // Global Variables
 int appWidth, appHeight;
-float titleX, titleY, titleWidth, titleHeight;
+float freakyX, freakyY, freakyWidth, freakyHeight;
 float superCoolPhraseX, superCoolPhraseY, superCoolPhraseWidth, superCoolPhraseHeight;
-float footerX, footerY, footerWidth, footerHeight;
-PFont titleFont, footerFont, phraseFont;
-color purple=#2C08FF, white=#FFFFFF, resetDefaultInk=white; //Not Night Mode Friendly
+float johnX, johnY, johnWidth, johnHeight;
+PFont freakyFont, johnFont, dokkanFont;
+color crispybrown=#C1884A, white=#FFFFFF, resetDefaultInk=white; //Not Night Mode Friendly
 int size;
-String title = "freaky", footer="This is at the bottom", phrase="ORA";
+String freaky = "freaky", dokkan="dokkan font goes hard", john="im gonna touch you vro";
 //
+void setup()
+{
 //Display
 size( 500, 700 ); //Portrait CANVAS
+background(25);
 appWidth = width;
 appHeight = height;
 //
@@ -24,40 +27,51 @@ appHeight = height;
 //String[] fontList = PFont.list(); //To list all fonts available on OS
 //printArray(fontList); //For listing all possible fonts to choose from, then createFont
 // Tools / Create Font / Find Font / Do not press "OK", known bug
-titleFont = createFont("Papyrus", 55); //Verify the font exists in Processing.Java
-footerFont = createFont("Arial", 55);
-phraseFont = createFont("Playbill", 55);
+freakyFont = createFont("Papyrus", 55); //Verify the font exists in Processing.Java
+johnFont = createFont("Edo SZ", 55);
+dokkanFont = createFont("HelveticaNeue BlackCond", 55);
 //
 /* Population
 - using 10's
 - Could be 100s or percent
 - Able to use decimals to dial in the values
 */
-titleX = appWidth*1/10;
-titleY = appHeight*1/10;
-titleWidth = appWidth*8/10;
-titleHeight = appHeight*1/10;
-superCoolPhraseX = titleX; //Best Practice: change on formula
+freakyX = appWidth*1/10;
+freakyY = appHeight*1/10;
+freakyWidth = appWidth*8/10;
+freakyHeight = appHeight*1/10;
+superCoolPhraseX = freakyX; //Best Practice: change on formula
 superCoolPhraseY = appHeight*4.5/10; //Ratio done last. How is this Centered Vertically?
-superCoolPhraseWidth = titleWidth; //Best Practice
-superCoolPhraseHeight = titleHeight; //Best Practice
-footerX = titleX; //Best Practice
-footerY = appHeight*8/10;
-footerWidth = titleWidth; //Best Practice
-footerHeight = titleHeight; //Best Practice
+superCoolPhraseWidth = freakyWidth; //Best Practice
+superCoolPhraseHeight = freakyHeight; //Best Practice
+johnX = freakyX; //Best Practice
+johnY = appHeight*8/10;
+johnWidth = freakyWidth; //Best Practice
+johnHeight = freakyHeight; //Best Practice
 //DIVs
-rect( titleX, titleY, titleWidth, titleHeight ); //Title Font
+rect( freakyX, freakyY, freakyWidth, freakyHeight ); //Title Font
 rect( superCoolPhraseX, superCoolPhraseY, superCoolPhraseWidth, superCoolPhraseHeight ); // Testing Aspect Ratio of Fonts
-rect( footerX, footerY, footerWidth, footerHeight ); //Different Font
+rect( johnX, johnY, johnWidth, johnHeight ); //Different Font
+}
 //
+void draw()
+{
 //Drawing Text
-fill(purple); //Ink, hexidecimal copied from Color Selector
+fill(crispybrown); //Ink, hexidecimal copied from Color Selector
 textAlign(CENTER, CENTER); //Align X&Y, see Processing.org / Reference
 //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
-size = 50; //Change the number until it fits
-textFont( titleFont, size ); 
-text( title, titleX, titleY, titleWidth, titleHeight );
-textFont( footerFont, size ); 
-text( footer, footerX, footerY, footerWidth, footerHeight );
-textFont( phraseFont, size ); 
-text( phrase, superCoolPhraseX, superCoolPhraseY, superCoolPhraseWidth, superCoolPhraseHeight );
+size = 30; //Change the number until it fits
+noStroke();
+textFont( freakyFont, size ); 
+text( freaky, freakyX, freakyY, freakyWidth, freakyHeight );
+textFont( johnFont, size ); 
+text( john, johnX, johnY, johnWidth, johnHeight );
+textFont( dokkanFont, size ); 
+text( dokkan, superCoolPhraseX, superCoolPhraseY, superCoolPhraseWidth, superCoolPhraseHeight ); 
+} // End draw
+//
+void mousePressed(){} //End mousePressed
+//
+void keyPressed(){}//End keyPressed
+//
+//end MAIN
