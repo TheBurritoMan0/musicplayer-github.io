@@ -1,4 +1,9 @@
-
+/* Static Text
+ - Testing for Aspect Ratio
+ - introduce single and mutliple executed code
+ - activity: do another rectangle with text in it
+ - copy and paste to dynamic program
+ */
 // Global Variables
 int appWidth, appHeight;
 float titleX, titleY, titleWidth, titleHeight;
@@ -7,7 +12,7 @@ float footerX, footerY, footerWidth, footerHeight;
 PFont titleFont, footerFont, phraseFont;
 color purple=#2C08FF, white=#FFFFFF, resetDefaultInk=white; //Not Night Mode Friendly
 int size;
-String title = "How do I write text?", footer="This is at the bottom", phrase="ORA";
+String title = "freaky", footer="This is at the bottom", phrase="ORA";
 //
 //Display
 size( 500, 700 ); //Portrait CANVAS
@@ -19,7 +24,7 @@ appHeight = height;
 //String[] fontList = PFont.list(); //To list all fonts available on OS
 //printArray(fontList); //For listing all possible fonts to choose from, then createFont
 // Tools / Create Font / Find Font / Do not press "OK", known bug
-titleFont = createFont("Harrington", 55); //Verify the font exists in Processing.Java
+titleFont = createFont("Papyrus", 55); //Verify the font exists in Processing.Java
 footerFont = createFont("Arial", 55);
 phraseFont = createFont("Playbill", 55);
 //
