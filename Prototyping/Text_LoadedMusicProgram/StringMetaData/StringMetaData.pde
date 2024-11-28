@@ -19,6 +19,9 @@ int numberOfSongs = 3
 AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
 AudioMetaData[] playListTitleMetaData = new AudioPlayer[numberOfSongs];
 AudioMetaData[] playListPositionMetaData = new AudioPlayer[numberOfSongs];
+AudioMetaData[] playListTimeRemainingMetaData = new AudioMetaData[numberOfSongs]; //might change
+AudioMetaData[] playListTotalTimeMetaData = new AudioMetaData[numberOfSongs]; //might change
+int currentSong = numberOfSongs - numberOfSongs;
 void setup() {
   fullScreen();
   appWidth = displayWidth;
