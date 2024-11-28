@@ -12,13 +12,13 @@ int appWidth, appHeight;
 float yeahX1, yeahY1, yeahWidth1, yeahHeight1;
 float yeahX2, yeahY2, yeahWidth2, yeahHeight2;
 float yeahX3, yeahY3, yeahWidth3, yeahHeight3;
-color title =#56B97A, song =#B98D56, songlength = #6964AA;
+//color title =#56B97A, song =#B98D56, songlength = #6964AA;
 //
 Minim minim;
-int numberOfSongs = 3
+int numberOfSongs = 3;
 AudioPlayer[] playList = new AudioPlayer[numberOfSongs];
-AudioMetaData[] playListTitleMetaData = new AudioPlayer[numberOfSongs];
-AudioMetaData[] playListPositionMetaData = new AudioPlayer[numberOfSongs];
+AudioMetaData[] playListTitleMetaData = new AudioMetaData[numberOfSongs];
+AudioMetaData[] playListPositionMetaData = new AudioMetaData[numberOfSongs];
 AudioMetaData[] playListTimeRemainingMetaData = new AudioMetaData[numberOfSongs]; //might change
 AudioMetaData[] playListTotalTimeMetaData = new AudioMetaData[numberOfSongs]; //might change
 int currentSong = numberOfSongs - numberOfSongs;
@@ -26,6 +26,28 @@ void setup() {
   fullScreen();
   appWidth = displayWidth;
   appHeight = displayHeight;
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder
+  //
+  // Load Music
+  String musicPathway = "Music/";
+  String mp3FileName = ".mp3";
+  //Alphebetical order, same as OS ordering files
+  String meatballParade = "Meatball-Parade";
+  String sneakySnitch = "Sneaky-Snitch";
+  String monkeys = "Monkeys-Spinning-Monkeys";
+  //
+  //Add Reading into Array
+  String directory = "../../../" + musicPathway;
+  String file = directory + meatballParade + mp3FileName;
+  playList[currentSong] = minim.loadFile( file );
+  file = directory + sneakySnitch + mp3FileName;
+  playList[currentSong+=1] = minim.loadFile( file );
+  file = directory + monkeys + mp3FileName;
+  playList[currentSong+=1] = minim.loadFile(file);
+  //
+  currentSong = 0;
+  //
+  playList[currentSong].play();
   //Population
   yeahX1 = appWidth*2/10; //Title Position (put it beside the top right corner)
   yeahY1 = appHeight*6/10;
@@ -46,7 +68,6 @@ void setup() {
 }
 //
 void draw() {
-  
 }
 //
 void mousePressed() {
