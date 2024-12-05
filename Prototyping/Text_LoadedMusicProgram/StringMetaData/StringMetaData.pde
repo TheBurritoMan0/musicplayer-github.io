@@ -17,8 +17,9 @@ float yeahX1, yeahY1, yeahWidth1, yeahHeight1;
 float yeahX2, yeahY2, yeahWidth2, yeahHeight2;
 float yeahX3, yeahY3, yeahWidth3, yeahHeight3;
 PFont freakyFont, johnFont, dokkanFont;
-color ink, title =#56B97A, song =#B98D56, songlength = #6964AA;
+color ink, crispybrown=#C1884A, white=#FFFFFF, resetDefaultInk=white;
 int size;
+String title = "sigma1", footer="sigma2", phrase="sigma3";
 Boolean randomColour = false;
 //
 /*
@@ -46,32 +47,41 @@ void setup()
   //
   //Add Reading into Array
   String directory = "../../../" + musicPathway;
+  String file = "";
+  /*
   String file = directory + meatballParade + mp3FileName;
   playList[currentSong] = minim.loadFile( file );
   file = directory + sneakySnitch + mp3FileName;
   playList[currentSong+=1] = minim.loadFile( file );
   file = directory + monkeys + mp3FileName;
   playList[currentSong+=1] = minim.loadFile(file);
+  */
   //
+  for (int i=0; i<numberOfSongs; i++) {
+    if (i==0) file = directory + meatballParade + mp3FileName;
+    if (i==1) file = directory + sneakySnitch + mp3FileName;
+    if (i==2) file = directory + monkeys + mp3FileName;
+    playList[i] = minim.loadFile( file );
+  }
   currentSong = 0;
   //
   //
   // NOTE: Lines of code repeating
+  /*
   playListMetaData[currentSong] = playList[currentSong].getMetaData(); //reads song meta 1, like song 1, mimicing array notation
   currentSong++;
   playListMetaData[currentSong] = playList[currentSong].getMetaData();
   currentSong++;
   playListMetaData[currentSong] = playList[currentSong].getMetaData();
   currentSong++;
-  playListMetaData[currentSong] = playList[currentSong].getMetaData();
+  */
   /* NOTE: Introduce FOR LOOP
    - Known: how many lines of code
    - WHILE is for unknown loop interations
-   
+   */
    for (int i=0; i<numberOfSongs; i++) {
    playListMetaData[i] = playList[i].getMetaData();
    }
-   */
   //
   currentSong = 0;
   //
@@ -107,30 +117,78 @@ void setup()
   //String[] fontList = PFont.list(); //To list all fonts available on OS
   //printArray(fontList); //For listing all possible fonts to choose from, then createFont
   // Tools / Create Font / Find Font / Do not press "OK", known bug
-  freakyFont = createFont("Harrington", 55); //Verify the font exists in Processing.Java
-  footerFont = createFont("Arial", 55);
-  phraseFont = createFont("Playbill", 55);
+  freakyFont = createFont("Papyrus", 55); //Verify the font exists in Processing.Java
+  johnFont = createFont("Edo SZ", 55);
+  dokkanFont = createFont("HelveticaNeue BlackCond", 55);
   //
   //
   //Population
-  metaDataX2 = metaDataX1 = appWidth*1/10;
-  metaDataY1 = appHeight*4/10;
-  metaDataWidth1 = appWidth*8/10;
-  metaDataHeight3 = metaDataHeight2 = metaDataHeight1 = appHeight*1/10;
-  metaDataY2 = appHeight*3/10;
-  metaDataWidth2 = appWidth*2/10;
-  metaDataX3 = appWidth*5/10;
-  metaDataY3 = appHeight*5/10;
-  metaDataWidth3 = appWidth*4/10;
+  yeahX2 = yeahX1 = appWidth*1/10;
+  yeahY1 = appHeight*4/10;
+  yeahWidth1 = appWidth*8/10;
+  yeahHeight3 = yeahHeight2 = yeahHeight1 = appHeight*1/10;
+  yeahY2 = appHeight*3/10;
+  yeahWidth2 = appWidth*2/10;
+  yeahX3 = appWidth*5/10;
+  yeahY3 = appHeight*5/10;
+  yeahWidth3 = appWidth*4/10;
   //
   //DIV: turn off onces repeated in VOID draw, saves systems resources
   //X, Y, Width, Height
-  //rect( metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1 ); //Title
-  //rect( metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2 ); //Position
-  //rect( metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3 ); //Time Remaining | Total Song Length
+  /*
+  rect( yeahX1, yeahY1, yeahWidth1, yeahHeight1 ); //Title
+  rect( yeahX2, yeahY2, yeahWidth2, yeahHeight2 ); //Position
+  rect( yeahX3, yeahY3, yeahWidth3, yeahHeight3 ); //Time Remaining | Total Song Length
+  */
 }
 //
 void draw() {
+  //
+  /*Optical Illusion creating movement
+   - screen goes at front of draw(), repeating setup()
+   */
+  fill(resetDefaultInk);
+  rect( yeahX1, yeahY1, yeahWidth1, yeahHeight1 );
+  rect( yeahX2, yeahY2, yeahWidth2, yeahHeight2 );
+  rect( yeahX3, yeahY3, yeahWidth3, yeahHeight3 );
+  //
+  //Drawing Text: applies to all text
+  textAlign(CENTER, CENTER); //Align X&Y, see Processing.org / Reference
+  //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
+  ink = crispybrown;
+  fill(ink);
+  size = 30; //Change the number until it fits
+  textFont( freakyFont, size );
+  /*Problem: .mp3 does not have the Meta Data Entered
+   - must inspect .mp3 properties / details for information
+   - what if Drag&Drop thus no inspection
+   - metadata=="", then should put something in for the user
+   */
+  String titleCheck = ( playListMetaData[currentSong].title()!="" ) ? "Title Exists": "Title Does not Exist" ; //Careful with "not ="
+  text( playListMetaData[currentSong].title(), yeahX1, yeahY1, yeahWidth1, yeahHeight1 );
+  fill(ink);
+  size = 43; //Change the number until it fits
+  textFont( footerFont, size );
+  //int timeRemaining = playListMetaData[currentSong].length()/1000; // Needs Updating
+  int timeRemaining = playListMetaData[currentSong].length()/1000 - playList[currentSong].position()/1000; // Needs Updating
+  String concatTimeRemaining = str ( timeRemaining ) + " | " + str ( playListMetaData[currentSong].length()/1000 ) + " Seconds";
+  text( concatTimeRemaining, yeahX3, yeahY3, yeahWidth3, yeahHeight3 ); //Note: str(timeRemaining)
+  //NOTE: Students to format Minutes and Seconds
+  //
+  //Repeating Code, different from Static
+  ink = ( randomColour == true ) ? color( random(0, 256), random(256), random(256) ) : purple ; //Ternary Operator
+  //
+  fill(ink);
+  size = 83; //Change the number until it fits
+  textFont( phraseFont, size );
+  text( str ( playList[currentSong].position()/1000 ), yeahX2, yeahY2, yeahWidth2, yeahHeight2 );
+  //
+  /*
+  fill(resetDefaultInk);
+   //rect( metaDataX1, metaDataY1, metaDataWidth1, metaDataHeight1 );
+   //rect( metaDataX2, metaDataY2, metaDataWidth2, metaDataHeight2 );
+   rect( metaDataX3, metaDataY3, metaDataWidth3, metaDataHeight3 );
+   */
 }
 //
 void mousePressed() {
