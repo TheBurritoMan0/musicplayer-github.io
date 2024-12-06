@@ -123,14 +123,14 @@ void setup()
   //
   //
   //Population
-  yeahX2 = yeahX1 = appWidth*1/10;
-  yeahY1 = appHeight*4/10;
-  yeahWidth1 = appWidth*8/10;
+  yeahX2 = yeahX1 = appWidth*6/10;
+  yeahY1 = appHeight*2/10;
+  yeahWidth1 = appWidth*4/10;
   yeahHeight3 = yeahHeight2 = yeahHeight1 = appHeight*1/10;
   yeahY2 = appHeight*3/10;
-  yeahWidth2 = appWidth*2/10;
-  yeahX3 = appWidth*5/10;
-  yeahY3 = appHeight*5/10;
+  yeahWidth2 = appWidth*4/10;
+  yeahX3 = appWidth*6/10;
+  yeahY3 = appHeight*4/10;
   yeahWidth3 = appWidth*4/10;
   //
   //DIV: turn off onces repeated in VOID draw, saves systems resources
@@ -168,7 +168,7 @@ void draw() {
   text( playListMetaData[currentSong].title(), yeahX1, yeahY1, yeahWidth1, yeahHeight1 );
   fill(ink);
   size = 43; //Change the number until it fits
-  textFont( footerFont, size );
+  textFont( johnFont, size );
   //int timeRemaining = playListMetaData[currentSong].length()/1000; // Needs Updating
   int timeRemaining = playListMetaData[currentSong].length()/1000 - playList[currentSong].position()/1000; // Needs Updating
   String concatTimeRemaining = str ( timeRemaining ) + " | " + str ( playListMetaData[currentSong].length()/1000 ) + " Seconds";
@@ -176,11 +176,11 @@ void draw() {
   //NOTE: Students to format Minutes and Seconds
   //
   //Repeating Code, different from Static
-  ink = ( randomColour == true ) ? color( random(0, 256), random(256), random(256) ) : purple ; //Ternary Operator
+  ink = ( randomColour == true ) ? color( random(0, 256), random(256), random(256) ) : crispybrown ; //Ternary Operator
   //
   fill(ink);
   size = 83; //Change the number until it fits
-  textFont( phraseFont, size );
+  textFont( dokkanFont, size );
   text( str ( playList[currentSong].position()/1000 ), yeahX2, yeahY2, yeahWidth2, yeahHeight2 );
   //
   /*
@@ -192,9 +192,110 @@ void draw() {
 }
 //
 void mousePressed() {
+  //Boolean for Click
+  //if() {} else {}
+  //
+  /* STOP Button Mouse Press, after Hoverover
+   Must have Hoverover to ensure mouse will activate, visual confirmation of algorithm
+   */
+  if ( mouseX>yeahX1 && mouseX<yeahX1+yeahWidth1 && mouseY>yeahY1 && mouseY<yeahY1+yeahHeight1 ) {
+    playList[currentSong].play(); // .loop(0) ... .play() matches keyPressed
+  }
 }
 //
 void keyPressed() {
+   // Random Colour of .title()
+  if ( randomColour == true ) {
+    randomColour = false;
+  } else {
+    randomColour = true;
+  }
+  //
+  /* Key Board Short Cuts ... learning what the Music Buttons could be
+   Note: CAP Lock with ||
+   if ( key==? || key==? ) ;
+   */
+  if ( key=='P' || key=='p' ) playList[currentSong].play(); //Simple Play, no double tap possible
+  //
+  //if ( key=='P' || key=='p' ) song[currentSong].loop(0); //Simple Play, double tap possible
+  /* Note: double tap is automatic rewind, no pause
+   Symbol is two triangles
+   This changes what the button might become after it is pressed
+   */
+  //if ( key=='S' || key=='s' ) song[currentSong].pause(); //Simple Stop, no double taps
+  //
+  if ( key=='S' | key=='s' ) {
+    if ( playList[currentSong].isPlaying() ) {
+      playList[currentSong].pause(); //single tap
+    } else {
+      playList[currentSong].rewind(); //double tap
+    }
+  }
+  if ( key=='L' || key=='l' ) playList[currentSong].loop(1); // Loop ONCE: Plays, then plays again, then stops & rewinds
+  if ( key=='K' || key=='k' ) playList[currentSong].loop(); // Loop Infinitely //Parameter: BLANK or -1
+  if ( key=='F' || key=='f' ) playList[currentSong].skip( 10000 ); // Fast Forward, Rewind, & Play Again //Parameter: milliseconds
+  if ( key=='R' || key=='r' ) playList[currentSong].skip( -10000 ); // Fast Reverse & Play //Parameter: negative numbers
+  if ( key=='M' || key=='m' ) { // MUTE
+    //
+    //MUTE Behaviour: stops electricty to speakers, does not stop file
+    //NOTE: MUTE has NO built-in PUASE button, NO built-in rewind button
+    //ERROR: if song near end of file, user will not know song is at the end
+    //Known ERROR: once song plays, MUTE acts like it doesn't work
+    if ( playList[currentSong].isMuted() ) {
+      //ERROR: song might not be playing
+      //CATCH: ask .isPlaying() or !.isPlaying()
+      playList[currentSong].unmute();
+    } else {
+      //Possible ERROR: Might rewind the song
+      playList[currentSong].mute();
+    }
+  }
+  if ( key=='O' || key=='o' ) { // Pause
+    //
+    if ( playList[currentSong].isPlaying() ) {
+      playList[currentSong].pause();
+    } else {
+      playList[currentSong].play();
+    }
+  }
+  if ( key==CODED || keyCode==ESC ) exit(); // QUIT //UP
+  if ( key=='Q' || key=='q' ) exit(); // QUIT
+  //
+  if ( key=='N' || key=='n' ) { // NEXT //See .txt for starter hint
+    if ( playList[currentSong].isPlaying() ) {
+      playList[currentSong].pause();
+      playList[currentSong].rewind();
+      //
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
+      }
+      playList[currentSong].play();
+    } else {
+      //
+      playList[currentSong].rewind();
+      //
+      if ( currentSong==numberOfSongs-1 ) {
+        currentSong = 0;
+      } else {
+        currentSong++;
+      }
+      // NEXT will not automatically play the song
+      //song[currentSong].play();
+    }
+  }
+  //if ( key=='P' || key=='p' ) ; // Previous //Students to finish
+  //
+  //if ( key=='S' || key=='s' ) ; // Shuffle - PLAY (Random)
+  //Note: will randomize the currentSong number
+  //Caution: random() is used very often
+  //Question: how does truncating decimals affect returning random() floats
+  /*
+  if ( key=='' || key=='' ) ; // Play-Pause-STOP //Advanced, beyond single buttons
+   - need to have basic GUI complete first
+   */
+  //
 }
 //
 // end main
