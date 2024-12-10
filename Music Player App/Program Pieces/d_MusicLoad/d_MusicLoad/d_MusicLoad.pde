@@ -13,6 +13,9 @@ int currentSong = numberOfSongs - numberOfSongs;  //beginning current song as ZE
 //
 void setup()
 {
+  size(1350, 900);
+  //
+  minim = new Minim(this);
   // Load Music
   String musicPathway = "Music/";
   String mp3FileName = ".mp3";
@@ -40,7 +43,10 @@ void setup()
   song[currentSong].play();
 } //End setup
 //
-void draw() {} //End draw
+void draw() {
+  textSize(100);
+  text("its working", 40, 120);
+} //End draw
 //
 void mousePressed() {} //End mousePressed
 //
