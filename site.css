@@ -9,7 +9,7 @@
 
 	}
 	section {
-		background-color: white;
+		background-color: #dc7b1a;
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
@@ -33,7 +33,7 @@
 		flex: 1;
 	}
 	section { 
-	background-color: white;
+	background-color: rgb(135, 61, 18);
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -49,10 +49,10 @@
 
 body {
 	max-width: 100%;
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Papyrus', fantasy;
 	margin: 0;
 	padding: 0;
-	background-color: white;
+	background-color: rgb(141, 128, 117);
 }
 
 h1 {
