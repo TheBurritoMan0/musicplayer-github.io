@@ -52,7 +52,7 @@ body {
 	font-family: 'Papyrus', fantasy;
 	margin: 0;
 	padding: 0;
-	background-color: rgb(141, 128, 117);
+	background-color: rgb(43, 42, 35);
 }
 
 h1 {
@@ -74,7 +74,7 @@ h2,h3,h4 {
 
 p {
 	font-size: 1.4em;
-	color: rgb(134, 119, 105);
+	color: rgb(48, 43, 39);
 	padding: 10px 40px 10px 40px;
 }
 
@@ -128,7 +128,7 @@ iframe {
 
 footer {
 	height: 100px;
-	background-color: #001bff;
+	background-color: #b4642f;
 }
 
 #complete {
