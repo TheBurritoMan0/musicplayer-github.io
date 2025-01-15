@@ -33,7 +33,7 @@
 		flex: 1;
 	}
 	section { 
-	background-color: rgb(135, 61, 18);
+	background-color: rgb(207, 128, 31);
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -74,7 +74,7 @@ h2,h3,h4 {
 
 p {
 	font-size: 1.4em;
-	color: black;
+	color: rgb(134, 119, 105);
 	padding: 10px 40px 10px 40px;
 }
 
@@ -100,7 +100,7 @@ img {
 
 
 header {
-	background-color: #001bff;
+	background-color: #b4642f;
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 20px;
@@ -108,11 +108,11 @@ header {
 }
 
 .bg1 {
-	background-color: #ffe400;
+	background-color: #8b8b8a;
 }
 
 .bg2 {
-	background-color: #001bff;
+	background-color: #b4642f;
 }
 
 .bg3 {
